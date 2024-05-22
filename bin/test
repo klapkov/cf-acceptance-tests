@@ -18,5 +18,7 @@ export RUN_ID
 
 pushd "${CATS_ROOT}" > /dev/null
   echo "Using $(go run github.com/onsi/ginkgo/v2/ginkgo version)"
-  go run github.com/onsi/ginkgo/v2/ginkgo --randomize-all --keep-going "$@"
+  touch report.json
+  cp -f --backup=numbered report.json report.json
+  go run github.com/onsi/ginkgo/v2/ginkgo --randomize-all --keep-going "$@" --json-report=reports/report.json
 popd > /dev/null
