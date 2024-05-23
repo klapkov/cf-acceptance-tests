@@ -20,7 +20,6 @@ import (
 
 	. "github.com/cloudfoundry/cf-acceptance-tests/cats_suite_helpers"
 	"github.com/cloudfoundry/cf-acceptance-tests/helpers/assets"
-	"github.com/cloudfoundry/cf-acceptance-tests/helpers/random_name"
 )
 
 type Plan struct {
@@ -84,21 +83,21 @@ func NewServiceBroker(name string, path string, TestSetup *workflowhelpers.Repro
 	b := ServiceBroker{}
 	b.Path = path
 	b.Name = name
-	b.Service.Name = random_name.CATSRandomName("SVC")
-	b.Service.ID = random_name.CATSRandomName("SVC-ID")
+	b.Service.Name = "test-service"
+	b.Service.ID = "test-service-id"
 
 	b.SyncPlans = []Plan{
-		{Name: random_name.CATSRandomName("SVC-PLAN"), ID: random_name.CATSRandomName("SVC-PLAN-ID")},
-		{Name: random_name.CATSRandomName("SVC-PLAN"), ID: random_name.CATSRandomName("SVC-PLAN-ID")},
+		{Name: "sync-plan-1", ID: "sync-plan-1-id"},
+		{Name: "sync-plan-2", ID: "sync-plan-2-id"},
 	}
 	b.AsyncPlans = []Plan{
-		{Name: random_name.CATSRandomName("SVC-PLAN"), ID: random_name.CATSRandomName("SVC-PLAN-ID")},
-		{Name: random_name.CATSRandomName("SVC-PLAN"), ID: random_name.CATSRandomName("SVC-PLAN-ID")},
-		{Name: random_name.CATSRandomName("SVC-PLAN"), ID: random_name.CATSRandomName("SVC-PLAN-ID")},
+		{Name: "async-plan-1", ID: "async-plan-1-id"},
+		{Name: "async-plan-2", ID: "async-plan-2-id"},
+		{Name: "async-plan-3", ID: "async-plan-3-id"},
 	}
-	b.Service.DashboardClient.ID = random_name.CATSRandomName("DASHBOARD-ID")
-	b.Service.DashboardClient.Secret = random_name.CATSRandomName("DASHBOARD-SECRET")
-	b.Service.DashboardClient.RedirectUri = random_name.CATSRandomName("DASHBOARD-URI")
+	b.Service.DashboardClient.ID = "test-service-dashboard-client-id"
+	b.Service.DashboardClient.Secret = "test-service-dashboard-client-secret"
+	b.Service.DashboardClient.RedirectUri = "test-service-dashboard-client-redirect-uri"
 	b.TestSetup = TestSetup
 	return b
 }
