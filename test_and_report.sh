@@ -7,5 +7,5 @@ else
   ./bin/test --procs=4 -v
 fi
 ./process_logs.sh
-./print_status_tree.sh
+python3 status_tree.py 
 
