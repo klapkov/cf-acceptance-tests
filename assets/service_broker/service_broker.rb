@@ -181,7 +181,7 @@ class ServiceBroker < Sinatra::Base
     status 422
     log_response(status, {
       'error' => 'AsyncRequired',
-      'description' => 'This service plan requires client support for asynchronous service operations.'
+      'description' => 'tttssssssssssssssssSssssssssssssss This service plan requires client support for asynchronous service operations.'
      }.to_json)
   end
 

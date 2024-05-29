@@ -80,8 +80,8 @@ var _ = ServicesDescribe("Service Instance Lifecycle", func() {
 		})
 
 		Describe("aaaa", func() {
-			FContext("vvvvv", func() {
-				It("bbbbb", func() {
+			Context("vvvvv", func() {
+				FIt("bbbbb", func() {
 					Expect(cf.Cf("apps").Wait()).To(Exit(0))
 				})
 			})

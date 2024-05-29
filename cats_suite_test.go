@@ -133,8 +133,10 @@ var _ = SynchronizedBeforeSuite(func() []byte {
 
 var _ = SynchronizedAfterSuite(func() {
 	if TestSetup != nil {
-		TestSetup.Teardown()
+		// TestSetup.Teardown()
 	}
 }, func() {
 	os.Remove(assets.NewAssets().DoraZip)
 })
+
+// HERE
