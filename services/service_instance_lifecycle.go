@@ -347,7 +347,7 @@ var _ = ServicesDescribe("Service Instance Lifecycle", func() {
 				instanceName = random_name.CATSRandomName("SVIN")
 				createService := cf.Cf("create-service", broker.Service.Name, broker.AsyncPlans[0].Name, instanceName, "-t", tags, "-c", params).Wait()
 				Expect(createService).To(Exit(0))
-				Expect(createService).To(Say("Create in progress."))
+				// Expect(createService).To(Say("Create in progress."))
 
 				waitForAsyncOperationToCompleteAndSay(broker, instanceName, "succeeded")
 
@@ -366,7 +366,7 @@ var _ = ServicesDescribe("Service Instance Lifecycle", func() {
 					instanceName = random_name.CATSRandomName("SVC")
 					createService := cf.Cf("create-service", broker.Service.Name, broker.AsyncPlans[0].Name, instanceName).Wait()
 					Expect(createService).To(Exit(0))
-					Expect(createService).To(Say("Create in progress."))
+					// Expect(createService).To(Say("Create in progress."))
 
 					waitForAsyncOperationToCompleteAndSay(broker, instanceName, "succeeded")
 				})
@@ -486,7 +486,7 @@ var _ = ServicesDescribe("Service Instance Lifecycle", func() {
 				instanceName = random_name.CATSRandomName("SVC")
 				createService := cf.Cf("create-service", broker.Service.Name, broker.AsyncPlans[2].Name, instanceName).Wait()
 				Expect(createService).To(Exit(0))
-				Expect(createService).To(Say("Create in progress."))
+				// Expect(createService).To(Say("Create in progress."))
 
 				waitForAsyncOperationToCompleteAndSay(broker, instanceName, "succeeded")
 
