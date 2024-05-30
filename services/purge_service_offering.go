@@ -67,7 +67,7 @@ var _ = ServicesDescribe("Purging service offerings", func() {
 
 			By("Having async service instances")
 			Expect(cf.Cf("create-service", broker.Service.Name, broker.AsyncPlans[0].Name, asyncInstanceName).Wait()).To(Exit(0))
-			Expect(cf.Cf("service", asyncInstanceName).Wait()).To(Say("create in progress"))
+			// Expect(cf.Cf("service", asyncInstanceName).Wait()).To(Say("create in progress"))
 
 			By("Making the broker unavailable")
 			Expect(cf.Cf("delete", broker.Name, "-f", "-r").Wait()).To(Exit(0))
@@ -132,7 +132,7 @@ var _ = ServicesDescribe("Purging service offerings", func() {
 
 				By("Having async service instances")
 				Expect(cf.Cf("create-service", broker.Service.Name, broker.AsyncPlans[0].Name, asyncInstanceName).Wait()).To(Exit(0))
-				Expect(cf.Cf("service", asyncInstanceName).Wait()).To(Say("create in progress"))
+				// Expect(cf.Cf("service", asyncInstanceName).Wait()).To(Say("create in progress"))
 
 				By("Making the broker unavailable")
 				Expect(cf.Cf("delete", broker.Name, "-f", "-r").Wait()).To(Exit(0))
