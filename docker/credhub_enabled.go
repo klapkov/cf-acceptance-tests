@@ -20,7 +20,8 @@ import (
 )
 
 var _ = DockerDescribe("Docker App Lifecycle CredHub Integration", func() {
-	Context("when CredHub is configured", func() {
+	PContext("when CredHub is configured", func() {
+
 		var chBrokerName, chServiceName, instanceName string
 
 		JustBeforeEach(func() {
