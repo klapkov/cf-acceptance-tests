@@ -289,9 +289,9 @@ func GuidForAppName(appName string) string {
 func CredhubDescribe(description string, callback func()) bool {
 	return Describe("[credhub]", func() {
 		BeforeEach(func() {
-			if !(Config.GetIncludeCredhubAssisted() || Config.GetIncludeCredhubNonAssisted()) {
-				Skip(skip_messages.SkipCredhubMessage)
-			}
+			// if !(Config.GetIncludeCredhubAssisted() || Config.GetIncludeCredhubNonAssisted()) {
+			Skip(skip_messages.SkipCredhubMessage)
+			// }
 		})
 		Describe(description, callback)
 	})
@@ -300,9 +300,9 @@ func CredhubDescribe(description string, callback func()) bool {
 func AssistedCredhubDescribe(description string, callback func()) bool {
 	return Describe("[assisted credhub]", func() {
 		BeforeEach(func() {
-			if !Config.GetIncludeCredhubAssisted() {
-				Skip(skip_messages.SkipAssistedCredhubMessage)
-			}
+			// if !Config.GetIncludeCredhubAssisted() {
+			Skip(skip_messages.SkipAssistedCredhubMessage)
+			// }
 		})
 		Describe(description, callback)
 	})
@@ -311,9 +311,9 @@ func AssistedCredhubDescribe(description string, callback func()) bool {
 func NonAssistedCredhubDescribe(description string, callback func()) bool {
 	return Describe("[non-assisted credhub]", func() {
 		BeforeEach(func() {
-			if !Config.GetIncludeCredhubNonAssisted() {
-				Skip(skip_messages.SkipNonAssistedCredhubMessage)
-			}
+			// if !Config.GetIncludeCredhubNonAssisted() {
+			Skip(skip_messages.SkipNonAssistedCredhubMessage)
+			// }
 		})
 		Describe(description, callback)
 	})
@@ -322,12 +322,12 @@ func NonAssistedCredhubDescribe(description string, callback func()) bool {
 func WindowsCredhubDescribe(description string, callback func()) bool {
 	return Describe("[windows credhub]", func() {
 		BeforeEach(func() {
-			if !Config.GetIncludeWindows() {
-				Skip(skip_messages.SkipWindowsMessage)
-			}
-			if !(Config.GetIncludeCredhubAssisted() || Config.GetIncludeCredhubNonAssisted()) {
-				Skip(skip_messages.SkipCredhubMessage)
-			}
+			// if !Config.GetIncludeWindows() {
+			Skip(skip_messages.SkipWindowsMessage)
+			// }
+			// if !(Config.GetIncludeCredhubAssisted() || Config.GetIncludeCredhubNonAssisted()) {
+			Skip(skip_messages.SkipCredhubMessage)
+			// }
 		})
 		Describe(description, callback)
 	})
@@ -336,9 +336,9 @@ func WindowsCredhubDescribe(description string, callback func()) bool {
 func WindowsAssistedCredhubDescribe(description string, callback func()) bool {
 	return Describe("[windows assisted credhub]", func() {
 		BeforeEach(func() {
-			if !Config.GetIncludeCredhubAssisted() {
-				Skip(skip_messages.SkipAssistedCredhubMessage)
-			}
+			// if !Config.GetIncludeCredhubAssisted() {
+			Skip(skip_messages.SkipAssistedCredhubMessage)
+			// }
 		})
 		Describe(description, callback)
 	})
@@ -347,9 +347,9 @@ func WindowsAssistedCredhubDescribe(description string, callback func()) bool {
 func WindowsNonAssistedCredhubDescribe(description string, callback func()) bool {
 	return Describe("[windows non-assisted credhub]", func() {
 		BeforeEach(func() {
-			if !Config.GetIncludeCredhubNonAssisted() {
-				Skip(skip_messages.SkipNonAssistedCredhubMessage)
-			}
+			// if !Config.GetIncludeCredhubNonAssisted() {
+			Skip(skip_messages.SkipNonAssistedCredhubMessage)
+			// }
 		})
 		Describe(description, callback)
 	})

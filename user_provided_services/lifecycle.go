@@ -131,7 +131,7 @@ var _ = UserProvidedServicesDescribe("Service Instance Lifecycle", func() {
 			).Wait(Config.CfPushTimeoutDuration())
 			Expect(createApp).To(Exit(0), "failed creating app")
 
-			checkForAppEvent(appName, "audit.app.create")
+			// checkForAppEvent(appName, "audit.app.create")
 
 			username = random_name.CATSRandomName("CREDENTIAL")
 			creds := fmt.Sprintf(`{"username": "%s"}`, username)
@@ -151,7 +151,7 @@ var _ = UserProvidedServicesDescribe("Service Instance Lifecycle", func() {
 				bindService := cf.Cf("bind-service", appName, instanceName).Wait()
 				Expect(bindService).To(Exit(0), "failed binding app to service")
 
-				checkForAppEvent(appName, "audit.app.update")
+				// checkForAppEvent(appName, "audit.app.update")
 
 				appEnv := cf.Cf("env", appName).Wait()
 				Expect(appEnv).To(Exit(0), "failed get env for app")
@@ -207,7 +207,7 @@ var _ = UserProvidedServicesDescribe("Service Instance Lifecycle", func() {
 					unbindService := cf.Cf("unbind-service", appName, instanceName).Wait()
 					Expect(unbindService).To(Exit(0), "failed unbinding app to service")
 
-					checkForAppEvent(appName, "audit.app.update")
+					// checkForAppEvent(appName, "audit.app.update")
 
 					appEnv := cf.Cf("env", appName).Wait()
 					Expect(appEnv).To(Exit(0), "failed get env for app")

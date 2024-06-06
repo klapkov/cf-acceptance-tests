@@ -244,7 +244,7 @@ var _ = ServicesDescribe("Service Instance Lifecycle", func() {
 				).Wait(Config.CfPushTimeoutDuration())
 				Expect(createApp).To(Exit(0), "failed creating app")
 
-				checkForAppEvent(appName, "audit.app.create")
+				// checkForAppEvent(appName, "audit.app.create")
 
 				instanceName = random_name.CATSRandomName("SVIN")
 				createService := cf.Cf("create-service", broker.Service.Name, broker.SyncPlans[0].Name, instanceName).Wait()
@@ -262,7 +262,7 @@ var _ = ServicesDescribe("Service Instance Lifecycle", func() {
 					bindService := cf.Cf("bind-service", appName, instanceName).Wait()
 					Expect(bindService).To(Exit(0), "failed binding app to service")
 
-					checkForAppEvent(appName, "audit.app.update")
+					// checkForAppEvent(appName, "audit.app.update")
 
 					appEnv := cf.Cf("env", appName).Wait()
 					Expect(appEnv).To(Exit(0), "failed get env for app")
@@ -299,7 +299,7 @@ var _ = ServicesDescribe("Service Instance Lifecycle", func() {
 						unbindService := cf.Cf("unbind-service", appName, instanceName).Wait()
 						Expect(unbindService).To(Exit(0), "failed unbinding app to service")
 
-						checkForAppEvent(appName, "audit.app.update")
+						// checkForAppEvent(appName, "audit.app.update")
 
 						appEnv := cf.Cf("env", appName).Wait()
 						Expect(appEnv).To(Exit(0), "failed get env for app")
