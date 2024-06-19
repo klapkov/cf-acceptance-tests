@@ -181,7 +181,7 @@ class ServiceBroker < Sinatra::Base
     status 422
     log_response(status, {
       'error' => 'AsyncRequired',
-      'description' => 'aaaThis service plan requires client support for asynchronous service operations.'
+      'description' => 'aaaaThis service plan requires client support for asynchronous service operations.'
      }.to_json)
   end
 
@@ -247,22 +247,27 @@ class ServiceBroker < Sinatra::Base
         log_response(status, behavior['raw_body'])
       end
     else
-      status 200
+      status 404
       log_response(status, {
+        error: 'ServiceBindingNotFound',
         state: 'failed',
         description: "Broker could not find service instance by the given id #{id}",
       }.to_json)
     end
   end
 
-  # fetch service binding
+  # Fetch service binding last operation
   get '/v2/service_instances/:instance_id/service_bindings/:binding_id/last_operation/?' do |instance_id, binding_id|
-    status 200
-    log_response(status, {
-      state: 'succeeded',
-      description: '100%',
-    }.to_json)
+    binding_data = $datasource.data['service_instances'][binding_id]
+    if binding_data
+      status 200
+      log_response(status, { state: 'succeeded', description: '100%' }.to_json)
+    else
+      status 404
+      log_response(status, { error: 'ServiceBindingNotFound', description: 'The service binding does not exist.' }.to_json)
+    end
   end
+
 
   # update service instance
   patch '/v2/service_instances/:id/?' do |id|
