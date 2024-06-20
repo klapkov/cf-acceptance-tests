@@ -228,7 +228,7 @@ class ServiceBroker < Sinatra::Base
   # fetch service instance
   get '/v2/service_instances/:id/last_operation/?' do |id|
     service_instance = $datasource.service_instance_by_id(id)
-    if service_instance
+    if service_instance && !service_instance.deleted
       plan_id = service_instance.plan_id
 
       if service_instance.increment_fetch_count > $datasource.max_fetch_service_instance_requests
@@ -249,7 +249,8 @@ class ServiceBroker < Sinatra::Base
     else
       status 404
       log_response(status, {
-        error: 'ServiceBindingNotFound',
+        status: status,
+        error: 'ServiceInstnceNotFound',
         state: 'failed',
         description: "Broker could not find service instance by the given id #{id}",
       }.to_json)
