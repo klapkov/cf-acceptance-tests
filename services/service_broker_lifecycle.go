@@ -3,6 +3,7 @@ package services_test
 import (
 	"encoding/json"
 	"fmt"
+
 	. "github.com/cloudfoundry/cf-acceptance-tests/cats_suite_helpers"
 	"github.com/cloudfoundry/cf-acceptance-tests/helpers/app_helpers"
 	"github.com/cloudfoundry/cf-acceptance-tests/helpers/assets"
@@ -181,6 +182,9 @@ var _ = ServicesDescribe("Service Broker Lifecycle", func() {
 
 						expectedOutput := fmt.Sprintf(accessOutput, broker.Service.Name, globallyPublicPlan.Name, "all")
 						Expect(output).To(MatchRegexp(expectedOutput))
+
+						commandResult := cf.Cf("disable-service-access", broker.Service.Name, "-p", orgPublicPlan.Name, "-o", otherOrgName).Wait()
+						Expect(commandResult).To(Exit(0))
 
 						expectedOutput = fmt.Sprintf(accessOutputWithOrg, broker.Service.Name, orgPublicPlan.Name, "limited", TestSetup.RegularUserContext().Org)
 						Expect(output).To(MatchRegexp(expectedOutput))
