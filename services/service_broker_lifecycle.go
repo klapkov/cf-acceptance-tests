@@ -175,6 +175,8 @@ var _ = ServicesDescribe("Service Broker Lifecycle", func() {
 
 				It("is visible to an admin user", func() {
 					workflowhelpers.AsUser(TestSetup.AdminUserContext(), TestSetup.ShortTimeout(), func() {
+						commandResult := cf.Cf("disable-service-access", broker.Service.Name, "-p", orgPublicPlan.Name, "-o", otherOrgName).Wait()
+						Expect(commandResult).To(Exit(0))
 						acls = cf.Cf("service-access", "-e", broker.Service.Name).Wait()
 						Expect(acls).To(Exit(0))
 						output = acls.Out.Contents()
@@ -182,9 +184,6 @@ var _ = ServicesDescribe("Service Broker Lifecycle", func() {
 
 						expectedOutput := fmt.Sprintf(accessOutput, broker.Service.Name, globallyPublicPlan.Name, "all")
 						Expect(output).To(MatchRegexp(expectedOutput))
-
-						commandResult := cf.Cf("disable-service-access", broker.Service.Name, "-p", orgPublicPlan.Name, "-o", otherOrgName).Wait()
-						Expect(commandResult).To(Exit(0))
 
 						expectedOutput = fmt.Sprintf(accessOutputWithOrg, broker.Service.Name, orgPublicPlan.Name, "limited", TestSetup.RegularUserContext().Org)
 						Expect(output).To(MatchRegexp(expectedOutput))
