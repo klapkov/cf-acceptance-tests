@@ -263,7 +263,7 @@ var _ = ServicesDescribe("Service Instance Lifecycle", func() {
 					Expect(bindService).To(Exit(0), "failed binding app to service")
 
 					// checkForAppEvent(appName, "audit.app.update")
-
+					time.Sleep(time.Second * 2)
 					appEnv := cf.Cf("env", appName).Wait()
 					Expect(appEnv).To(Exit(0), "failed get env for app")
 					Expect(appEnv).To(Say("credentials"))
@@ -300,7 +300,7 @@ var _ = ServicesDescribe("Service Instance Lifecycle", func() {
 						Expect(unbindService).To(Exit(0), "failed unbinding app to service")
 
 						// checkForAppEvent(appName, "audit.app.update")
-
+						time.Sleep(time.Second * 2)
 						appEnv := cf.Cf("env", appName).Wait()
 						Expect(appEnv).To(Exit(0), "failed get env for app")
 						Expect(appEnv).ToNot(Say("credentials"))
@@ -470,6 +470,7 @@ var _ = ServicesDescribe("Service Instance Lifecycle", func() {
 
 							// checkForAppEvent(appName, "audit.app.update")
 
+							time.Sleep(2 * time.Second)
 							appEnv := cf.Cf("env", appName).Wait()
 							Expect(appEnv).To(Exit(0), "failed get env for app")
 							Expect(appEnv).ToNot(Say("credentials"))
