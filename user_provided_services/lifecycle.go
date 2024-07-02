@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"strings"
+	"time"
 
 	. "github.com/cloudfoundry/cf-acceptance-tests/cats_suite_helpers"
 
@@ -209,6 +210,7 @@ var _ = UserProvidedServicesDescribe("Service Instance Lifecycle", func() {
 
 					// checkForAppEvent(appName, "audit.app.update")
 
+					time.Sleep(2 * time.Second)
 					appEnv := cf.Cf("env", appName).Wait()
 					Expect(appEnv).To(Exit(0), "failed get env for app")
 					Expect(appEnv).ToNot(Say("credentials"))
