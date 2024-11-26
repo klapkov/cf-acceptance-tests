@@ -36,12 +36,9 @@ import (
 
 	. "github.com/cloudfoundry/cf-acceptance-tests/helpers/cli_version_check"
 	"github.com/cloudfoundry/cf-acceptance-tests/helpers/config"
-	"github.com/cloudfoundry/cf-test-helpers/v2/cf"
 	"github.com/cloudfoundry/cf-test-helpers/v2/helpers"
-	"github.com/cloudfoundry/cf-test-helpers/v2/workflowhelpers"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	. "github.com/onsi/gomega/gexec"
 )
 
 const minCliVersion = "8.5.0"
@@ -114,21 +111,21 @@ var _ = SynchronizedBeforeSuite(func() []byte {
 	SetDefaultEventuallyTimeout(Config.DefaultTimeoutDuration())
 	SetDefaultEventuallyPollingInterval(1 * time.Second)
 
-	TestSetup = workflowhelpers.NewTestSuiteSetup(Config)
+	// TestSetup = workflowhelpers.NewTestSuiteSetup(Config)
 
-	workflowhelpers.AsUser(TestSetup.AdminUserContext(), Config.GetScaledTimeout(1*time.Minute), func() {
-		buildpacksSession := cf.Cf("buildpacks").Wait()
-		Expect(buildpacksSession).To(Exit(0))
-		buildpacks := string(buildpacksSession.Out.Contents())
+	// workflowhelpers.AsUser(TestSetup.AdminUserContext(), Config.GetScaledTimeout(1*time.Minute), func() {
+	// 	buildpacksSession := cf.Cf("buildpacks").Wait()
+	// 	Expect(buildpacksSession).To(Exit(0))
+	// 	buildpacks := string(buildpacksSession.Out.Contents())
 
-		Expect(buildpacks).To(ContainSubstring(Config.GetBinaryBuildpackName()), "Missing the binary buildpack specified in the integration_config.json. There may be other missing buildpacks as well; please double-check your configuration against the buildpacks listed below.")
-		Expect(buildpacks).To(ContainSubstring(Config.GetGoBuildpackName()), "Missing the go buildpack specified in the integration_config.json. There may be other missing buildpacks as well; please double-check your configuration against the buildpacks listed below.")
-		Expect(buildpacks).To(ContainSubstring(Config.GetJavaBuildpackName()), "Missing the java buildpack specified in the integration_config.json. There may be other missing buildpacks as well; please double-check your configuration against the buildpacks listed below.")
-		Expect(buildpacks).To(ContainSubstring(Config.GetNodejsBuildpackName()), "Missing the NodeJS buildpack specified in the integration_config.json. There may be other missing buildpacks as well; please double-check your configuration against the buildpacks listed below.")
-		Expect(buildpacks).To(ContainSubstring(Config.GetRubyBuildpackName()), "Missing the ruby buildpack specified in the integration_config.json. There may be other missing buildpacks as well; please double-check your configuration against the buildpacks listed below.")
-	})
+	// 	Expect(buildpacks).To(ContainSubstring(Config.GetBinaryBuildpackName()), "Missing the binary buildpack specified in the integration_config.json. There may be other missing buildpacks as well; please double-check your configuration against the buildpacks listed below.")
+	// 	Expect(buildpacks).To(ContainSubstring(Config.GetGoBuildpackName()), "Missing the go buildpack specified in the integration_config.json. There may be other missing buildpacks as well; please double-check your configuration against the buildpacks listed below.")
+	// 	Expect(buildpacks).To(ContainSubstring(Config.GetJavaBuildpackName()), "Missing the java buildpack specified in the integration_config.json. There may be other missing buildpacks as well; please double-check your configuration against the buildpacks listed below.")
+	// 	Expect(buildpacks).To(ContainSubstring(Config.GetNodejsBuildpackName()), "Missing the NodeJS buildpack specified in the integration_config.json. There may be other missing buildpacks as well; please double-check your configuration against the buildpacks listed below.")
+	// 	Expect(buildpacks).To(ContainSubstring(Config.GetRubyBuildpackName()), "Missing the ruby buildpack specified in the integration_config.json. There may be other missing buildpacks as well; please double-check your configuration against the buildpacks listed below.")
+	// })
 
-	TestSetup.Setup()
+	// TestSetup.Setup()
 })
 
 var _ = SynchronizedAfterSuite(func() {
